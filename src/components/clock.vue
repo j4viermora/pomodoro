@@ -4,28 +4,44 @@
             <nav
                 class="text-white flex justify-center items-center gap-4 cursor-pointer font-semibold"
             >
-                <span
-                    style="background: rgba(0, 0, 0, 0.15)"
-                    class="py-1 px-2 rounded-md"
+                <button
+                    :class="interval === 'pomodoro' && 'interval-button'"
+                    @click="updateInterval('pomodoro')"
                 >
                     Pomodoro
-                </span>
-                <span class=""> Descanso corto </span>
-                <span class=""> Descanso largo </span>
+                </button>
+                <button
+                    :class="interval === 'shortBreak' && 'interval-button'"
+                    @click="updateInterval('shortBreak')"
+                >
+                    Descanso corto
+                </button>
+                <button
+                    :class="interval === 'longBreak' && 'interval-button'"
+                    @click="updateInterval('longBreak')"
+                >
+                    Descanso largo
+                </button>
             </nav>
             <section class="flex justify-center items-center">
                 <div style="font-size: 120px" class="text-white mt-4">
-                    <span id="minutes">25</span>
-                    <span>:</span>
-                    <span id="seconds">00</span>
+                    <span id="minutes"
+                        >{{ pomodoro.minutes }}:{{
+                            pomodoro.seconds ? pomodoro.seconds : "00"
+                        }}</span
+                    >
                 </div>
             </section>
             <section class="flex justify-center">
                 <button
-                    @click="isActive = !isActive"
-                    :class="'button' + ' ' + (isActive ? 'button-active' : '')"
+                    @click="pomodoro.running ? stop() : start()"
+                    :class="
+                        'button' +
+                        ' ' +
+                        (pomodoro.running ? 'button-active' : '')
+                    "
                 >
-                    Iniciar
+                    {{ pomodoro.running ? "Detener" : "Iniciar" }}
                 </button>
             </section>
             <section class="flex flex-col justify-center items-center mt-4">
@@ -36,9 +52,9 @@
     </section>
 </template>
 
-<script setup>
-import { ref } from "vue";
-const isActive = ref(false);
+<script setup lang="ts">
+import { usePomodoro } from "../composables/usePomodoro";
+const { pomodoro, start, stop, updateInterval, interval } = usePomodoro();
 </script>
 
 <style scoped>
@@ -62,5 +78,9 @@ const isActive = ref(false);
     color: rgb(186, 73, 73);
     transform: translateY(6px);
     box-shadow: none;
+}
+
+.interval-button {
+    @apply py-1 px-2 rounded-md bg-black;
 }
 </style>

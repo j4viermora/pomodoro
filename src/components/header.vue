@@ -16,7 +16,6 @@
                     clip-rule="evenodd"
                 />
             </svg>
-
             <span class="text-white text-xl"> Pomodoro </span>
         </div>
         <div class="flex items-center justify-between gap-4">

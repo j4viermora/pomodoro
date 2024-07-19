@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "license": "Apache-2.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
@@ -10,6 +11,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "pinia": "^2.1.7",
     "vue": "^3.4.29",
     "vue-router": "^4.4.0"
   },

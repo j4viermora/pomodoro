@@ -27,7 +27,7 @@
     </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ItemTask from "./item-task.vue";
 </script>
 
