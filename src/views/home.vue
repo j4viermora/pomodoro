@@ -3,11 +3,14 @@
         <header-app />
         <clock />
         <list-task />
+        <add-to-task />
     </main>
 </template>
 
 <script setup lang="ts">
 import headerApp from "../components/header.vue";
-import clock from "../components/clock.vue";
-import listTask from "../components/item-list.vue";
+import Clock from "../components/clock.vue";
+import ListTask from "../components/item-list.vue";
+import AddToTask from "../components/add-to-task.vue";
 </script>
+d
