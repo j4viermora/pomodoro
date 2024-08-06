@@ -53,8 +53,19 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from "vue";
 import { usePomodoro } from "../composables/usePomodoro";
 const { pomodoro, start, stop, updateInterval, interval } = usePomodoro();
+
+watch(pomodoro, () => {
+    if (pomodoro.running) {
+        window.document.title =
+            pomodoro.minutes + ":" + pomodoro.seconds + " Focus";
+    }
+    if (pomodoro.running === false) {
+        window.document.title = "Pomodoro stop";
+    }
+});
 </script>
 
 <style scoped>

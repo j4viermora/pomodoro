@@ -22,13 +22,23 @@
             </div>
         </div>
         <section class="mt-4">
-            <item-task title="Tarea 1" />
+            <item-task
+                v-for="task in tasks"
+                :key="task.id"
+                :title="task.title"
+                :id="task.id"
+                :status="task.completed"
+                @remove="remove"
+                @completed="setCompleted"
+            />
         </section>
     </section>
 </template>
 
 <script setup lang="ts">
+import { useTasks } from "../composables/useTasks";
 import ItemTask from "./item-task.vue";
+const { remove, setCompleted } = useTasks();
+defineProps(["tasks"]);
 </script>
-
 <style></style>
