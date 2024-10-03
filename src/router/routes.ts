@@ -3,9 +3,10 @@ import HomeView from "../views/home.vue";
 import ProfileView from "../views/profile.vue";
 
 const routes: RouteRecordRaw[] = [
-    { path: "", component: HomeView },
+    { path: "", name: "home", component: HomeView },
     {
         path: "/profile",
+        name: "profile",
         component: ProfileView,
     },
 ];

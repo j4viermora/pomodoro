@@ -14,12 +14,12 @@ export const useAuthState = () => {
         unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
                 // Usuario autenticado
-                (user.uid = currentUser.uid),
-                    (user.email = currentUser.email),
-                    (user.displayName = currentUser.displayName),
-                    (user.photoURL = currentUser.photoURL),
+                user.uid = currentUser.uid
+                user.email = currentUser.email
+                user.displayName = currentUser.displayName
+                user.photoURL = currentUser.photoURL
                     // Añade aquí cualquier otra propiedad que necesites
-                    console.log("Usuario autenticado:", user.value);
+                console.log("Usuario autenticado:", user);
                 isAuth.value = true;
             } else {
                 // Usuario no autenticado

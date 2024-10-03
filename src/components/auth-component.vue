@@ -27,7 +27,8 @@
 import { signInWithGoogle } from "../firebase/auth";
 
 const signIn = async () => {
-    await signInWithGoogle();
+    await signInWithGoogle()
+    document.getElementById("auth-button")?.click()
 };
 
 </script>

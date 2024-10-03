@@ -25,6 +25,11 @@ export const signInWithGoogle = async () => {
     }
 };
 
+const signOut = () => {
+    auth.signOut();
+};
+
 export {
-    onAuthStateChanged
+    onAuthStateChanged,
+    signOut
 }

@@ -40,7 +40,7 @@
             </div>
             <router-link
                 v-if="isAuth"
-                to="/profile"
+                :to="{ name: 'profile' }"
                 class="text-white cursor-pointer flex gap-2 items-center"
             >
                 <img
