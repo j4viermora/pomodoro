@@ -53,7 +53,6 @@
 </template>
 <script lang="ts" setup>
 import AppLayout from "../components/@ui/app-layout.vue";
-import HeaderApp from "../components/header.vue";
 import { useAuthState } from "../composables/useAuthState";
 import { signOut } from "../firebase/auth";
 const { user } = useAuthState();
