@@ -38,7 +38,23 @@
 
                 Configuración
             </div>
-            <div class="text-white cursor-pointer flex gap-1">
+            <router-link
+                v-if="isAuth"
+                to="/profile"
+                class="text-white cursor-pointer flex gap-2 items-center"
+            >
+                <img
+                    class="w-6 h-6 rounded-lg"
+                    :src="user.photoURL"
+                    alt="photo-de-perfil"
+                />
+                Profile
+            </router-link>
+            <div
+                v-else
+                @click="showAuthModal()"
+                class="text-white cursor-pointer flex gap-2 items-center"
+            >
                 <svg
                     class="w-6 h-6 text-gray-800 dark:text-white"
                     aria-hidden="true"
@@ -54,9 +70,16 @@
                         clip-rule="evenodd"
                     />
                 </svg>
-
-                Perfil
+                Iniciar sesión
             </div>
         </div>
     </section>
 </template>
+
+<script setup lang="ts">
+import { useAuthState } from "../composables/useAuthState";
+const { isAuth, user } = useAuthState();
+const showAuthModal = () => {
+    document.getElementById("auth-button")?.click();
+};
+</script>
