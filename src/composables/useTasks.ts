@@ -1,7 +1,10 @@
 import { defineStore } from "pinia";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
+import { createTask, getTasks } from "../firebase/db/tasks";
+import { auth } from "../firebase/auth";
 
 export const useTasks = defineStore("tasks-store", () => {
+    const isLoading = ref(false);
     const tasks = reactive<{
         list: Array<{
             title: string;
@@ -12,15 +15,36 @@ export const useTasks = defineStore("tasks-store", () => {
         list: [],
     });
 
-    const create = (task: string) => {
-        tasks.list = [
-            {
-                title: task,
-                id: new Date().getTime(),
+
+    const getAllTasks = async () => {
+        try {
+            isLoading.value = true;
+            const results =  await getTasks();
+            results.forEach((task) => {
+                tasks.list.push({
+                    title: task.description,
+                    id: task.id,
+                    completed: task.completed,
+                });
+            });
+        } catch (error) {
+            console.log(error);
+        } finally{
+            isLoading.value = false;
+        }
+    };
+
+
+    const create = async (task: string) => {
+        try {
+          await createTask({
+                user: auth.currentUser?.uid ?? "",
+                description: task,
                 completed: false,
-            },
-            ...tasks.list,
-        ];
+          });
+        } catch (error) {
+            console.log(error);
+        }
     };
     const remove = (id: string | number) => {
         tasks.list = tasks.list.filter((item) => item.id !== id);
@@ -40,5 +64,7 @@ export const useTasks = defineStore("tasks-store", () => {
         remove,
         update,
         setCompleted,
+        getAllTasks,
+        isLoading
     };
 });

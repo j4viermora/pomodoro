@@ -18,7 +18,8 @@
             <auth-component />
         </modal>
         <clock />
-        <list-task :tasks="task.tasks.list" />
+        <spinner v-if="task.isLoading" class="mt-4" />
+        <list-task v-else :tasks="task.tasks.list" />
         <add-to-task />
     </main>
 </template>
@@ -28,11 +29,17 @@ import headerApp from "../components/header.vue";
 import Clock from "../components/clock.vue";
 import ListTask from "../components/item-list.vue";
 import AddToTask from "../components/add-to-task.vue";
+import AuthComponent from "../components/auth-component.vue";
+
+// UI
 import Alert from "../components/@ui/alert.vue";
 import Modal from "../components/@ui/modal.vue";
-import AuthComponent from "../components/auth-component.vue";
+import Spinner from "../components/@ui/spinner.vue";
+
+
 import { useTasks } from "../composables/useTasks";
 import { useAuthState } from "../composables/useAuthState";
-const { isAuth} = useAuthState();
+const { isAuth } = useAuthState();
 const task = useTasks();
+task.getAllTasks();
 </script>
