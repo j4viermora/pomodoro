@@ -27,6 +27,11 @@
 </template>
 
 <script setup lang="ts">
+// vue
+import { watch } from "vue";
+
+// components
+
 import headerApp from "../components/header.vue";
 import Clock from "../components/clock.vue";
 import ListTask from "../components/item-list.vue";
@@ -43,4 +48,10 @@ import { useAuthState } from "../composables/useAuthState";
 const { isAuth } = useAuthState();
 const task = useTasks();
 task.getAllTasks();
+
+watch(isAuth, (newValue) => {
+    if (newValue) {
+        task.getAllTasks();
+    }
+});
 </script>
