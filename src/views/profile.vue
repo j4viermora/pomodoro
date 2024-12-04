@@ -57,6 +57,6 @@ import { useAuthState } from "../composables/useAuthState";
 import { signOut } from "../firebase/auth";
 const { user } = useAuthState();
 const logout = () => {
-    signOut();
+    signOut()
 };
 </script>

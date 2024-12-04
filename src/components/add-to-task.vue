@@ -50,8 +50,10 @@ const handleSubmit = () => {
     if (description.value === "") return;
     if (description.value.length === 0) return;
     showForm.value = false;
-    tasks.create(description.value);
-    description.value = "";
+    tasks.create(description.value).then(() => {
+        description.value = "";
+        tasks.getAllTasks();
+    });
 };
 
 const handleShowForm = () => {

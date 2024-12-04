@@ -19,7 +19,6 @@ export const useAuthState = () => {
                 user.displayName = currentUser.displayName
                 user.photoURL = currentUser.photoURL
                     // Añade aquí cualquier otra propiedad que necesites
-                console.log("Usuario autenticado:", user);
                 isAuth.value = true;
             } else {
                 // Usuario no autenticado

@@ -8,19 +8,21 @@
             class="w-full"
             id="auth-button"
             hidden
-        >
-        </button>
+        ></button>
         <alert v-if="!isAuth" class="mt-4">
-            Para que las tareas se guarden en la base de datos, debes iniciar
-            sesión
+            Para gestionar tus tareas debes estar autenticado
         </alert>
         <modal id="auth-modal" title="Identificate">
             <auth-component />
         </modal>
         <clock />
-        <spinner v-if="task.isLoading" class="mt-4" />
-        <list-task v-else :tasks="task.tasks.list" />
-        <add-to-task />
+        <template v-if="isAuth">
+            <div>
+                <spinner v-if="task.isLoading" class="mt-4" />
+                <list-task v-else :tasks="task.tasks.list" />
+                <add-to-task />
+            </div>
+        </template>
     </main>
 </template>
 
@@ -35,7 +37,6 @@ import AuthComponent from "../components/auth-component.vue";
 import Alert from "../components/@ui/alert.vue";
 import Modal from "../components/@ui/modal.vue";
 import Spinner from "../components/@ui/spinner.vue";
-
 
 import { useTasks } from "../composables/useTasks";
 import { useAuthState } from "../composables/useAuthState";

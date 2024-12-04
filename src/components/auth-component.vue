@@ -27,8 +27,13 @@
 import { signInWithGoogle } from "../firebase/auth";
 
 const signIn = async () => {
-    await signInWithGoogle()
-    document.getElementById("auth-button")?.click()
+    try {
+        await signInWithGoogle()
+        document.getElementById("auth-button")?.click()
+        window.location.reload()
+    } catch (error) {
+        window.alert("Error al iniciar sesión")
+    }
 };
 
 </script>
